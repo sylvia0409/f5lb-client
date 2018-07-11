@@ -1,0 +1,72 @@
+.file {
+  position: relative;
+  border: 1px solid #3f51b5;
+  border-radius: 4px;
+  padding: 12px 15px;
+  top: 35px;
+  left: 16px;
+  overflow: hidden;
+  color: #3f51b5;
+  text-decoration: none;
+  text-indent: 0;
+  line-height: 20px;
+  font-size: 16px;
+}
+
+.file input {
+  position: absolute;
+  right: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.file:hover {
+  background: #E8EAF6;
+  border-color: #3f51b5;
+  color: #3f51b5;
+  text-decoration: none;
+}
+
+.file-name {
+  position: relative;
+  display:inline-block;
+  font-size: 16px;
+  color: #3f51b5;
+  top: 35px;
+  margin-left: 35px;
+  line-height:16px;
+}
+
+.text {
+  width: 97%;
+  margin-left: 15px;
+  margin-top: 65px;
+  font-size: 16px;
+}
+
+::ng-deep .CodeMirror {
+  margin-left: 10px;
+  margin-top: 80px;
+  height: 400px;
+  border: solid 1px #E0E0E0;
+  border-radius: 4px;
+}
+
+.action {
+  margin: 5% 25% 3% 34%;
+}
+
+.lower-button {
+  border: solid 1px;
+  border-radius: 4px;
+  padding: 0 8px;
+  height: 45px;
+  width: 100px;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 4px;
+}
+
+button.mat-button.mat-primary {
+  margin-left: 25%;
+}

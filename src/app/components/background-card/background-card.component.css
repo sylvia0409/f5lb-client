@@ -1,0 +1,30 @@
+mat-card {
+  position: center;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+mat-card-header {
+  margin-top: 20px !important;
+  margin-left: 40px;
+}
+
+.header-image {
+  height: 80px;
+  width: 80px;
+  background-image: url("../../assets/F5_logo.svg");
+  background-size: 80px 80px;
+}
+
+.header-content{
+  margin-left: 20px;
+  height: 90px;
+}
+
+.header-title {
+  font-size: 28px;
+}
+
+.header-describe {
+  font-size: 16px;
+}

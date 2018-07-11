@@ -1,0 +1,16 @@
+<label class="file">
+  上传yaml文件
+  <input type="file" (change)="selectFile($event.target.files)">
+</label>
+<div class="file-name">{{fileName}}</div>
+
+<codemirror id="code" [(ngModel)]="editedYaml" [config]="config" (focus)="onFocus()"></codemirror>
+
+<!--<mat-form-field class="text" appearance="outline">-->
+  <!--<textarea [(ngModel)]="editedYaml" matInput rows="20" placeholder="在此编辑yaml">-->
+  <!--</textarea>-->
+<!--</mat-form-field>-->
+<div class="action">
+  <button mat-button color="warn" class="lower-button" (click)="clear()">清空</button>
+  <button mat-button color="primary" class="lower-button" (click)="submit()">提交</button>
+</div>

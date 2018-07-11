@@ -1,0 +1,6 @@
+::ng-deep .mat-snack-bar-container {
+  background: #6002ee !important;
+  text-align: center;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+  font-size: 18px;
+}

@@ -1,0 +1,65 @@
+<div class="add-device-card">
+  <p mat-dialog-title>修改 ConfigMap</p>
+  <div mat-dialog-content>
+    <p class="title" id="first-title" *ngIf="device['cmName'] && device['namespace']">
+      {{device['namespace']}} : {{device['cmName']}}
+    </p>
+    <mat-form-field appearance="outline">
+      <mat-label>
+        分区
+      </mat-label>
+      <input matInput [(ngModel)]="device['partition']" autocomplete="off" spellcheck="false" [formControl]="partitionControl" required>
+      <mat-error *ngIf="partitionControl.hasError('required')"> 必填</mat-error>
+    </mat-form-field>
+    <mat-form-field class="right-input" appearance="outline">
+      <mat-label>
+        对外访问地址(请指定端口）
+      </mat-label>
+      <input matInput [(ngModel)]="device['vsAddress']" autocomplete="off" spellcheck="false" [formControl]="addressControl" required>
+      <mat-error *ngIf="addressControl.hasError('required')">必填</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>
+        服务名
+      </mat-label>
+      <input matInput [(ngModel)]="device['serviceName']" autocomplete="off" spellcheck="false" [formControl]="serviceNameControl" required>
+      <mat-error *ngIf="serviceNameControl.hasError('required')"> 必填</mat-error>
+    </mat-form-field>
+    <mat-form-field class="right-input" appearance="outline">
+      <mat-label>
+        服务端口
+      </mat-label>
+      <input matInput [(ngModel)]="device['servicePort']" autocomplete="off" spellcheck="false" [formControl]="servicePortControl" required>
+      <mat-error *ngIf="servicePortControl.hasError('required')">必填</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-select [(ngModel)]="device['balance']" placeholder="负载平衡算法">
+        <mat-option *ngFor="let balance of balances" [value]="balance">
+          {{balance}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <p class="title" id="login-info">
+      登录信息
+    </p>
+    <mat-form-field appearance="outline">
+      <mat-label>
+        用户名
+      </mat-label>
+      <input matInput [(ngModel)]="device['username']" autocomplete="off" spellcheck="false" [formControl]="usernameControl" required>
+      <mat-error *ngIf="usernameControl.hasError('required')"> 请输入用户名 </mat-error>
+    </mat-form-field>
+    <mat-form-field class="right-input" appearance="outline">
+      <mat-label>
+        密码
+      </mat-label>
+      <input matInput type="password" [(ngModel)]="device['password']" [formControl]="passwordControl" required>
+      <mat-error *ngIf="passwordControl.hasError('required')"> 请输入密码</mat-error>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="action">
+    <button mat-button (click)="onNoClick()">取消</button>
+    <button mat-button (click)="updateResult()" [mat-dialog-close]="originData" color="primary">确定</button>
+  </div>
+</div>

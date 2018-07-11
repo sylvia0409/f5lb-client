@@ -1,0 +1,102 @@
+.mat-toolbar {
+  font: 500 14px/32px Roboto,"Helvetica Neue",sans-serif;
+  background-color: white;
+  margin-top: 10px;
+  padding: 0 5px;
+}
+
+.mat-form-field-flex {
+  height: 20px;
+}
+
+.mat-input {
+  margin-top: 10px;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
+}
+
+.mat-form-field {
+  margin-top: 20px;
+  width: 20%;
+}
+
+.first-line-button {
+  font-size: 16px;
+  font-weight: 400;
+  border: solid 1px;
+  border-radius: 4px;
+  padding: 0 8px;
+}
+
+#add-button {
+  height: 45px;
+  width: 115px;
+  margin-left: 10px;
+  margin-top: 8px;
+  padding: 0 0;
+}
+
+#refresh-button {
+  margin-left: 20px;
+  min-width: 10px;
+  height: 40px;
+}
+
+.material-icons {
+  margin-bottom: 2px;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-elevation-z8 {
+  margin: 25px 5px;
+  text-align: center;
+}
+
+.mat-header-cell {
+  font-size: 15px;
+  font-weight: 400;
+  text-align: center;
+}
+/*第一列宽度*/
+th.mat-header-cell.cdk-column-DeviceName.mat-column-DeviceName.ng-star-inserted {
+  width: 16%;
+}
+/*第二列宽度*/
+th.mat-header-cell.cdk-column-Address.mat-column-Address.ng-star-inserted {
+  width: 19%;
+}
+/*第三列宽度*/
+th.mat-header-cell.cdk-column-Partition.mat-column-Partition.ng-star-inserted {
+  width: 16%;
+}
+/*第四列宽度*/
+th.mat-header-cell.cdk-column-BindNum.mat-column-BindNum.ng-star-inserted {
+  width: 10%;
+}
+/*第五列宽度*/
+th.mat-header-cell.cdk-column-Status.mat-column-Status.ng-star-inserted {
+  width: 15%;
+}
+/*第六列宽度*/
+th.mat-header-cell.cdk-column-Action.mat-column-Action.ng-star-inserted {
+  width: 115px;
+}
+
+.form-button {
+  min-width: 37px;
+  padding: 0 0;
+}
+
+#build .material-icons {
+  margin-top: 5px;
+  font-size: 20px;
+}
+
+::ng-deep mat-form-field.mat-paginator-page-size-select {
+  text-align: center !important;
+}

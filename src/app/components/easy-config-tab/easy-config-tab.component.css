@@ -1,0 +1,103 @@
+.menu {
+  width: 145px;
+  margin-left: 15px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+mat-card {
+  margin: 15px 12px;
+  position: center;
+}
+
+.inner-content {
+  margin-top: 15px;
+}
+
+#f5-select.mat-form-field-infix {
+  border-top: 0;
+}
+
+mat-form-field {
+  font-size: 16px;
+  width: 200px;
+}
+
+textarea {
+  height: 50px;
+}
+
+p {
+  font-size: 18px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  margin-top: 25px;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+  border-top: 8px solid transparent;
+}
+
+::ng-deep .mat-select-arrow {
+  margin-top: 8px !important;
+  margin-right: 3px !important;
+}
+
+.left-input {
+  margin-left: 50px;
+  padding-top: 20px;
+}
+
+.right-input {
+  margin-left: 80px;
+  padding-top: 20px;
+}
+
+.under-title-left-input {
+  margin-left: 50px;
+  padding-top: 10px;
+}
+
+.under-title-right-input {
+  margin-left: 80px;
+  padding-top: 10px;
+}
+
+.split {
+  height: 1px;
+  width: 93%;
+  background: #3f51b5;
+  margin-left: 15px;
+  margin-bottom: 10px;
+}
+
+.inner-title {
+  margin-left: 50px;
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.action {
+  padding-top: 7%;
+  padding-bottom: 5%;
+  padding-left: 30%;
+}
+
+button {
+  border: solid 1px;
+  border-radius: 4px;
+  padding: 0 8px;
+  height: 45px;
+  width: 100px;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 4px;
+}
+
+button.mat-button.mat-primary {
+  margin-left: 47px;
+}
+
+mat-error {
+  font-size: 14px;
+}
