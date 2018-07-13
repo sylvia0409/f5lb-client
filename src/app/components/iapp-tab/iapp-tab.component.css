@@ -62,26 +62,7 @@ table {
   font-weight: 400;
   text-align: center;
 }
-/*第一列宽度*/
-th.mat-header-cell.cdk-column-DeviceName.mat-column-DeviceName.ng-star-inserted {
-  width: 16%;
-}
-/*第二列宽度*/
-th.mat-header-cell.cdk-column-Address.mat-column-Address.ng-star-inserted {
-  width: 19%;
-}
-/*第三列宽度*/
-th.mat-header-cell.cdk-column-Partition.mat-column-Partition.ng-star-inserted {
-  width: 16%;
-}
-/*第四列宽度*/
-th.mat-header-cell.cdk-column-BindNum.mat-column-BindNum.ng-star-inserted {
-  width: 10%;
-}
-/*第五列宽度*/
-th.mat-header-cell.cdk-column-Status.mat-column-Status.ng-star-inserted {
-  width: 15%;
-}
+
 /*第六列宽度*/
 th.mat-header-cell.cdk-column-Action.mat-column-Action.ng-star-inserted {
   width: 115px;

@@ -2,41 +2,40 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {BehaviorSubject, Observable} from "rxjs/index";
 
-//todo: delete setItem
+//todo: delete this
 localStorage.setItem('DCE_TOKEN', 'eyJhbGciOiJIUzI1NiIsImV4cCI6MTUzMzY5NjY4NSwiaWF0IjoxNTMxMTA0Njg1fQ.eyJ1c2VybmFtZSI6ImFkbWluIn0.9KeEUwYDTIixQs3piRwt-HJiZY_zutlFLvyEMnR2lDk');
-
-const options = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/yaml',
-    'X-DCE-Access-Token': localStorage.getItem('DCE_TOKEN')
-  })
-};
+localStorage.setItem('DCE_TENANT', 'default');
+const baseURL = 'http://192.168.100.86/';
 
 @Injectable({
   providedIn: 'root'
 })
 
-//todo: change url
 export class DataService {
-
-  private _deviceSource = new BehaviorSubject<any[]>([]);
+  namespace = localStorage.getItem('DCE_TENANT');
+  private options = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/yaml',
+      'X-DCE-Access-Token': localStorage.getItem('DCE_TOKEN')
+    })
+  };
+  private _configMapSource = new BehaviorSubject<any[]>([]);
 
   constructor(private http: HttpClient) {
-
   }
 
-  getAllConfigMaps(namespace): Observable<any[]> {
-    this.http.get(`http://192.168.100.86/api/v1/namespaces/${namespace}/configmaps`, options)
+  getAllConfigMaps(): Observable<any[]> {
+    this.http.get(baseURL + `api/v1/namespaces/${this.namespace}/configmaps`, this.options)
       .toPromise()
       .then((res: any) => {
-        this._deviceSource.next(res.items)
+        this._configMapSource.next(res.items)
       })
       .catch(this.handleError);
-    return this._deviceSource.asObservable();
+    return this._configMapSource.asObservable();
   }
 
-  getOneConfigMap(namespace, deviceName): Promise<any>{
-    return this.http.get(`http://192.168.100.86/api/v1/namespaces/${namespace}/configmaps/${deviceName}`, options)
+  getOneConfigMap(cmName): Promise<any>{
+    return this.http.get(baseURL + `api/v1/namespaces/${this.namespace}/configmaps/${cmName}`, this.options)
       .toPromise()
       .then((res) => {
         return res;
@@ -44,27 +43,22 @@ export class DataService {
       .catch(this.handleError);
   }
 
-  addConfigMap(namespace, configMap, type): Promise<any>{
-    if(type == 'file'){
-      const formData: FormData = new FormData();
-      formData.append('fileKey', configMap, configMap.name);
-      configMap = formData;
-    }
-    return this.http.post(`http://192.168.100.86/api/v1/namespaces/${namespace}/configmaps`, configMap, options)
+  addConfigMap(configMap): Promise<any>{
+    return this.http.post(baseURL + `api/v1/namespaces/${this.namespace}/configmaps`, configMap, this.options)
       .toPromise()
       .then()
       .catch(this.handleError);
   }
 
-  changeConfigMap(namespace, configMap, deviceName): Promise<any> {
-    return this.http.put(`http://192.168.100.86/api/v1/namespaces/${namespace}/configmaps/${deviceName}`, configMap, options)
+  changeConfigMap(configMap, cmName): Promise<any> {
+    return this.http.put(baseURL + `api/v1/namespaces/${this.namespace}/configmaps/${cmName}`, configMap, this.options)
       .toPromise()
       .then()
       .catch(this.handleError);
   }
 
-  deleteConfigMap(namespace, deviceName): Promise<any> {
-    return this.http.delete(`http://192.168.100.86/api/v1/namespaces/${namespace}/configmaps/${deviceName}`, options)
+  deleteConfigMap(deviceName): Promise<any> {
+    return this.http.delete(baseURL + `api/v1/namespaces/${this.namespace}/configmaps/${deviceName}`,this.options)
       .toPromise()
       .then((res) =>{
         console.log('delete: ', res);

@@ -1,119 +1,5 @@
-<!--choose panel-->
-<mat-form-field appearance="outline" class="menu">
-  <mat-select [(ngModel)]="currentMenu">
-    <mat-option *ngFor="let select of menu" [value]="select">
-      {{select}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-<!--controller config-->
-<mat-card *ngIf="currentMenu == '控制器设置'">
-  <mat-card-content class="inner-content">
-    <!--BIG-IP section-->
-    <p> BIG-IP system </p>
-    <mat-toolbar class="split"></mat-toolbar>
-    <!--first row-->
-    <div class="form-line">
-      <mat-form-field class="left-input">
-        <mat-label>
-          分区
-        </mat-label>
-        <input matInput [(ngModel)]="newControllerConfig['bigip_partition']" autocomplete="off" [formControl]="ctrPartitionControl" required>
-        <mat-error *ngIf="ctrPartitionControl.hasError('required')"> 请输入分区 </mat-error>
-      </mat-form-field>
-      <mat-form-field class="right-input">
-        <mat-label>
-          URL
-        </mat-label>
-        <input matInput type="url" [(ngModel)]="newControllerConfig['bigip_url']" autocomplete="off" [formControl]="urlControl" required>
-        <mat-error *ngIf="urlControl.hasError('required')"> 请输入url </mat-error>
-      </mat-form-field>
-    </div>
-    <!--second row-->
-    <div class="form-line">
-      <mat-form-field class="left-input">
-        <mat-label>
-          用户名
-        </mat-label>
-        <input matInput [(ngModel)]="newControllerConfig['bigip_username']" autocomplete="off" [formControl]="usernameControl" required>
-        <mat-error *ngIf="usernameControl.hasError('required')"> 请输入用户名 </mat-error>
-      </mat-form-field>
-      <mat-form-field class="right-input">
-        <mat-label>
-          密码
-        </mat-label>
-        <input matInput type="password" [(ngModel)]="newControllerConfig['bigip_password']" autocomplete="off" [formControl]="passwordControl" required>
-        <mat-error *ngIf="passwordControl.hasError('required')"> 请输入密码 </mat-error>
-      </mat-form-field>
-    </div>
-
-    <!--General section-->
-    <p> General </p>
-    <mat-toolbar class="split"></mat-toolbar>
-    <!--first row-->
-    <div class="form-line">
-      <mat-form-field class="left-input" >
-        <mat-label>
-          http_listen_address
-        </mat-label>
-        <input matInput [(ngModel)]="newControllerConfig['http_listen_address']"  autocomplete="off">
-      </mat-form-field>
-      <mat-form-field class="right-input">
-        <mat-label>
-          log_level
-        </mat-label>
-        <input matInput [(ngModel)]="newControllerConfig['log_level']" autocomplete="off">
-      </mat-form-field>
-    </div>
-    <!--second row-->
-    <div class="form-line">
-      <mat-form-field class="left-input">
-        <mat-label>
-          node_poll_interval
-        </mat-label>
-        <input matInput [(ngModel)]="newControllerConfig['node_poll_interval']" autocomplete="off">
-      </mat-form-field>
-      <mat-form-field class="right-input">
-        <mat-label>
-          python_basedir
-        </mat-label>
-        <input matInput [(ngModel)]="newControllerConfig['python_basedir']" autocomplete="off">
-      </mat-form-field>
-    </div>
-    <!--third row-->
-    <div class="form-line">
-      <mat-form-field class="left-input">
-        <mat-label>
-          schema_db_base_dir
-        </mat-label>
-        <input matInput [(ngModel)]="newControllerConfig['schema_db_base_dir']" autocomplete="off">
-      </mat-form-field>
-      <mat-form-field class="right-input">
-        <mat-label>
-          verify_interval
-        </mat-label>
-        <input matInput [(ngModel)]="newControllerConfig['verify_interval']" autocomplete="off">
-      </mat-form-field>
-    </div>
-    <!--fourth row-->
-    <div class="form-line">
-      <mat-form-field class="left-input">
-        <mat-label>
-          vs_snat_pool_name
-        </mat-label>
-        <input matInput [(ngModel)]="newControllerConfig['vs_snat_pool_name']" autocomplete="off">
-      </mat-form-field>
-    </div>
-    <!--button-->
-    <div class="action">
-      <button mat-button color="warn" (click)="clear()">清空</button>
-      <button mat-button color="primary" (click)="submit()">提交</button>
-    </div>
-  </mat-card-content>
-</mat-card>
-
 <!--F5 resource config-->
-<mat-card *ngIf="currentMenu == 'F5 资源设置'">
+<mat-card>
   <mat-card-content class="inner-content">
     <p> 资源类型 </p>
     <mat-toolbar class="split"></mat-toolbar>
@@ -124,10 +10,33 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+
     <!--virtual server page-->
     <div *ngIf="currentType == '虚拟服务器'">
+
+      <!--Login section-->
+      <p> F5 Login </p>
+      <mat-toolbar class="split"></mat-toolbar>
+      <!--first row-->
+      <div class="form-line">
+        <mat-form-field class="left-input">
+          <mat-label>
+            Username
+          </mat-label>
+          <input matInput [(ngModel)]="login['username']" autocomplete="off" [formControl]="usernameControl" required>
+          <mat-error *ngIf="usernameControl.hasError('required')"> 请输入用户名 </mat-error>
+        </mat-form-field>
+        <mat-form-field class="right-input">
+          <mat-label>
+            Password
+          </mat-label>
+          <input matInput type="password" [(ngModel)]="login['password']" autocomplete="off" [formControl]="passwordControl" required>
+          <mat-error *ngIf="passwordControl.hasError('required')"> 请输入密码 </mat-error>
+        </mat-form-field>
+      </div>
+
       <!--Frontend section-->
-      <p> 前端 </p>
+      <p> Frontend </p>
       <mat-toolbar class="split"></mat-toolbar>
       <!--first row-->
       <div class="form-line">
@@ -135,11 +44,11 @@
           <mat-label>
             分区
           </mat-label>
-          <input matInput [(ngModel)]="newVirtualServerConfig['frontend']['partition']" autocomplete="off" [formControl]="vsPartitionControl" required>
+          <input matInput [(ngModel)]="newVirtualServerConfig['data']['data']['virtualServer']['frontend']['partition']" autocomplete="off" [formControl]="vsPartitionControl" required>
           <mat-error *ngIf="vsPartitionControl.hasError('required')"> 请输入分区 </mat-error>
         </mat-form-field>
         <mat-form-field class="right-input">
-          <mat-select [(ngModel)]="newVirtualServerConfig['frontend']['balance']" placeholder="负载平衡算法">
+          <mat-select [(ngModel)]="newVirtualServerConfig['data']['data']['virtualServer']['frontend']['balance']" placeholder="负载平衡算法">
             <mat-option *ngFor="let balance of balances" [value]="balance">
               {{balance}}
             </mat-option>
@@ -152,13 +61,15 @@
           <mat-label>
             对外访问地址
           </mat-label>
-          <input matInput [(ngModel)]="newVirtualServerConfig['frontend']['virtualAddress']['bindAddr']" autocomplete="off">
+          <input matInput [(ngModel)]="newVirtualServerConfig['data']['data']['virtualServer']['frontend']['virtualAddress']['bindAddr']" autocomplete="off" [formControl]="addressControl" required>
+          <mat-error *ngIf="addressControl.hasError('required')"> 请输入地址 </mat-error>
         </mat-form-field>
         <mat-form-field class="right-input">
           <mat-label>
             端口
           </mat-label>
-          <input matInput [(ngModel)]="newVirtualServerConfig['frontend']['virtualAddress']['port']" autocomplete="off">
+          <input matInput [(ngModel)]="newVirtualServerConfig['data']['data']['virtualServer']['frontend']['virtualAddress']['port']" autocomplete="off" [formControl]="addressControl" required>
+          <mat-error *ngIf="addressControl.hasError('required')"> 请输入端口 </mat-error>
         </mat-form-field>
       </div>
       <!--third row-->
@@ -167,26 +78,28 @@
           <mat-label>
             F5 Profile Name
           </mat-label>
-          <input matInput [(ngModel)]="newVirtualServerConfig['frontend']['sslProfile']['f5ProfileName']" autocomplete="off">
+          <input matInput [(ngModel)]="newVirtualServerConfig['data']['data']['virtualServer']['frontend']['sslProfile']['f5ProfileName']" autocomplete="off">
         </mat-form-field>
         <mat-form-field class="right-input">
           <mat-label>
             F5 Profile Names
           </mat-label>
-          <input matInput [(ngModel)]="newVirtualServerConfig['frontend']['sslProfile']['f5ProfileNames']" autocomplete="off">
+          <input matInput [(ngModel)]="newVirtualServerConfig['data']['data']['virtualServer']['frontend']['sslProfile']['f5ProfileNames']" autocomplete="off">
         </mat-form-field>
       </div>
       <!--fourth row-->
       <div class="form-line">
         <mat-form-field class="left-input">
-          <mat-select [(ngModel)]="newVirtualServerConfig['frontend']['mode']" placeholder="代理模式">
+          <mat-select [(ngModel)]="newVirtualServerConfig['data']['data']['virtualServer']['frontend']['mode']" placeholder="代理模式">
             <mat-option *ngFor="let mode of modes" [value]="mode">
               {{mode}}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
-      <p> 后端 </p>
+
+      <!--Backend section-->
+      <p> Backend </p>
       <mat-toolbar class="split"></mat-toolbar>
       <!--first row-->
       <div class="form-line">
@@ -194,14 +107,14 @@
           <mat-label>
             Service Name
           </mat-label>
-          <input matInput [(ngModel)]="newVirtualServerConfig['backend']['serviceName']" autocomplete="off" [formControl]="vsServiceNameControl" required>
+          <input matInput [(ngModel)]="newVirtualServerConfig['data']['data']['virtualServer']['backend']['serviceName']" autocomplete="off" [formControl]="vsServiceNameControl" required>
           <mat-error *ngIf="vsServiceNameControl.hasError('required')"> 必填 </mat-error>
         </mat-form-field>
         <mat-form-field class="right-input">
           <mat-label>
             Service Port
           </mat-label>
-          <input matInput [(ngModel)]="newVirtualServerConfig['backend']['servicePort']" autocomplete="off" [formControl]="vsServicePortControl" required>
+          <input matInput [(ngModel)]="newVirtualServerConfig['data']['data']['virtualServer']['backend']['servicePort']" autocomplete="off" [formControl]="vsServicePortControl" required>
           <mat-error *ngIf="vsServicePortControl.hasError('required')"> 必填 </mat-error>
         </mat-form-field>
       </div>
@@ -212,13 +125,13 @@
           <mat-label>
             Protocol
           </mat-label>
-          <input matInput [(ngModel)]="newVirtualServerConfig['backend']['healthMonitors']['protocol']" autocomplete="off">
+          <input matInput [(ngModel)]="newVirtualServerConfig['data']['data']['virtualServer']['backend']['healthMonitors']['protocol']" autocomplete="off">
         </mat-form-field>
         <mat-form-field class="under-title-right-input">
           <mat-label>
             Interval
           </mat-label>
-          <input matInput [(ngModel)]="newVirtualServerConfig['backend']['healthMonitors']['interval']" autocomplete="off">
+          <input matInput [(ngModel)]="newVirtualServerConfig['data']['data']['virtualServer']['backend']['healthMonitors']['interval']" autocomplete="off">
         </mat-form-field>
       </div>
       <!--third row-->
@@ -227,13 +140,13 @@
           <mat-label>
             send
           </mat-label>
-          <input matInput [(ngModel)]="newVirtualServerConfig['backend']['healthMonitors']['send']" autocomplete="off">
+          <input matInput [(ngModel)]="newVirtualServerConfig['data']['data']['virtualServer']['backend']['healthMonitors']['send']" autocomplete="off">
         </mat-form-field>
         <mat-form-field class="right-input">
           <mat-label>
             recv
           </mat-label>
-          <input matInput [(ngModel)]="newVirtualServerConfig['backend']['healthMonitors']['recv']" autocomplete="off">
+          <input matInput [(ngModel)]="newVirtualServerConfig['data']['data']['virtualServer']['backend']['healthMonitors']['recv']" autocomplete="off">
         </mat-form-field>
       </div>
       <!--fourth row-->
@@ -242,14 +155,37 @@
           <mat-label>
             timeout
           </mat-label>
-          <input matInput class="input" [(ngModel)]="newVirtualServerConfig['backend']['healthMonitors']['timeout']" autocomplete="off">
+          <input matInput class="input" [(ngModel)]="newVirtualServerConfig['data']['data']['virtualServer']['backend']['healthMonitors']['timeout']" autocomplete="off">
         </mat-form-field>
       </div>
     </div>
+
     <!--iApp page-->
     <div *ngIf="currentType == 'iApp'">
+
+      <!--Login section-->
+      <p> F5 Login </p>
+      <mat-toolbar class="split"></mat-toolbar>
+      <!--first row-->
+      <div class="form-line">
+        <mat-form-field class="left-input">
+          <mat-label>
+            Username
+          </mat-label>
+          <input matInput [(ngModel)]="login['username']" autocomplete="off" [formControl]="usernameControl" required>
+          <mat-error *ngIf="usernameControl.hasError('required')"> 请输入用户名 </mat-error>
+        </mat-form-field>
+        <mat-form-field class="right-input">
+          <mat-label>
+            Password
+          </mat-label>
+          <input matInput type="password" [(ngModel)]="login['password']" autocomplete="off" [formControl]="passwordControl" required>
+          <mat-error *ngIf="passwordControl.hasError('required')"> 请输入密码 </mat-error>
+        </mat-form-field>
+      </div>
+
       <!--Frontend section-->
-      <p> 前端 </p>
+      <p> Frontend </p>
       <mat-toolbar class="split"></mat-toolbar>
       <!--first row-->
       <div class="form-line">
@@ -257,14 +193,14 @@
           <mat-label>
             分区
           </mat-label>
-          <input matInput [(ngModel)]="newIappConfig['frontend']['partition']" autocomplete="off" [formControl]="iPartitionControl" required>
+          <input matInput [(ngModel)]="newIappConfig['data']['data']['virtualServer']['frontend']['partition']" autocomplete="off" [formControl]="iPartitionControl" required>
           <mat-error *ngIf="iPartitionControl.hasError('required')"> 必填 </mat-error>
         </mat-form-field>
         <mat-form-field class="right-input">
           <mat-label>
             iApp
           </mat-label>
-          <input matInput [(ngModel)]="newIappConfig['frontend']['iapp']" autocomplete="off" [formControl]="iAppControl" required>
+          <input matInput [(ngModel)]="newIappConfig['data']['data']['virtualServer']['frontend']['iapp']" autocomplete="off" [formControl]="iAppControl" required>
           <mat-error *ngIf="iAppControl.hasError('required')"> 必填 </mat-error>
         </mat-form-field>
       </div>
@@ -274,14 +210,14 @@
           <mat-label>
             iApp PoolMember<br/>Table
           </mat-label>
-          <textarea matInput [(ngModel)]="newIappConfig['frontend']['iappPoolMemberTable']" autocomplete="off" [formControl]="iappPoolMemberTableControl" required></textarea>
+          <textarea matInput [(ngModel)]="newIappConfig['data']['data']['virtualServer']['frontend']['iappPoolMemberTable']" autocomplete="off" [formControl]="iappPoolMemberTableControl" required></textarea>
           <mat-error *ngIf="iappPoolMemberTableControl.hasError('required')"> 必填 </mat-error>
         </mat-form-field>
         <mat-form-field class="right-input" appearance="outline">
           <mat-label>
             iApp Tables
           </mat-label>
-          <textarea matInput [(ngModel)]="newIappConfig['frontend']['iappTables']" autocomplete="off"></textarea>
+          <textarea matInput [(ngModel)]="newIappConfig['data']['data']['virtualServer']['frontend']['iappTables']" autocomplete="off"></textarea>
         </mat-form-field>
       </div>
       <!--third row-->
@@ -290,18 +226,20 @@
           <mat-label>
             iApp Options
           </mat-label>
-          <textarea matInput [(ngModel)]="newIappConfig['frontend']['iappOptions']" autocomplete="off" [formControl]="iappOptionsControl" required></textarea>
+          <textarea matInput [(ngModel)]="newIappConfig['data']['data']['virtualServer']['frontend']['iappOptions']" autocomplete="off" [formControl]="iappOptionsControl" required></textarea>
           <mat-error *ngIf="iappOptionsControl.hasError('required')"> 必填 </mat-error>
         </mat-form-field>
         <mat-form-field class="right-input" appearance="outline">
           <mat-label>
             iApp Variables
           </mat-label>
-          <textarea matInput [(ngModel)]="newIappConfig['frontend']['iappVariables']" autocomplete="off" [formControl]="iappVariablesControl" required></textarea>
+          <textarea matInput [(ngModel)]="newIappConfig['data']['data']['virtualServer']['frontend']['iappVariables']" autocomplete="off" [formControl]="iappVariablesControl" required></textarea>
           <mat-error *ngIf="iappVariablesControl.hasError('required')"> 必填 </mat-error>
         </mat-form-field>
       </div>
-      <p> 后端 </p>
+
+      <!--Backend section-->
+      <p> Backend </p>
       <mat-toolbar class="split"></mat-toolbar>
       <!--first row-->
       <div class="form-line">
@@ -309,14 +247,14 @@
           <mat-label>
             Service Name
           </mat-label>
-          <input matInput [(ngModel)]="newIappConfig['backend']['serviceName']" autocomplete="off" [formControl]="iappServiceNameControl" required>
+          <input matInput [(ngModel)]="newIappConfig['data']['data']['virtualServer']['backend']['serviceName']" autocomplete="off" [formControl]="iappServiceNameControl" required>
           <mat-error *ngIf="iappServiceNameControl.hasError('required')"> 必填 </mat-error>
         </mat-form-field>
         <mat-form-field class="right-input">
           <mat-label>
             Service Port
           </mat-label>
-          <input matInput [(ngModel)]="newIappConfig['backend']['servicePort']" autocomplete="off" [formControl]="iappServicePortControl" required>
+          <input matInput [(ngModel)]="newIappConfig['data']['data']['virtualServer']['backend']['servicePort']" autocomplete="off" [formControl]="iappServicePortControl" required>
           <mat-error *ngIf="iappServicePortControl.hasError('required')"> 必填 </mat-error>
         </mat-form-field>
       </div>
@@ -327,13 +265,13 @@
           <mat-label>
             Protocol
           </mat-label>
-          <input matInput [(ngModel)]="newIappConfig['backend']['healthMonitors']['protocol']" autocomplete="off">
+          <input matInput [(ngModel)]="newIappConfig['data']['data']['virtualServer']['backend']['healthMonitors']['protocol']" autocomplete="off">
         </mat-form-field>
         <mat-form-field class="under-title-right-input">
           <mat-label>
             Interval
           </mat-label>
-          <input matInput [(ngModel)]="newIappConfig['backend']['healthMonitors']['interval']" autocomplete="off">
+          <input matInput [(ngModel)]="newIappConfig['data']['data']['virtualServer']['backend']['healthMonitors']['interval']" autocomplete="off">
         </mat-form-field>
       </div>
       <!--third row-->
@@ -342,13 +280,13 @@
           <mat-label>
             send
           </mat-label>
-          <input matInput [(ngModel)]="newIappConfig['backend']['healthMonitors']['send']" autocomplete="off">
+          <input matInput [(ngModel)]="newIappConfig['data']['data']['virtualServer']['backend']['healthMonitors']['send']" autocomplete="off">
         </mat-form-field>
         <mat-form-field class="right-input">
           <mat-label>
             recv
           </mat-label>
-          <input matInput [(ngModel)]="newIappConfig['backend']['healthMonitors']['recv']" autocomplete="off">
+          <input matInput [(ngModel)]="newIappConfig['data']['data']['virtualServer']['backend']['healthMonitors']['recv']" autocomplete="off">
         </mat-form-field>
       </div>
       <!--fourth row-->
@@ -357,7 +295,7 @@
           <mat-label>
             timeout
           </mat-label>
-          <input matInput class="input" [(ngModel)]="newIappConfig['backend']['healthMonitors']['timeout']" autocomplete="off">
+          <input matInput class="input" [(ngModel)]="newIappConfig['data']['data']['virtualServer']['backend']['healthMonitors']['timeout']" autocomplete="off">
         </mat-form-field>
       </div>
     </div>
@@ -369,4 +307,5 @@
     </div>
   </mat-card-content>
 </mat-card>
+
 

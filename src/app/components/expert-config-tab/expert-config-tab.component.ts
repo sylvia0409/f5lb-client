@@ -2,6 +2,7 @@ import {AfterViewInit, Component, ElementRef, Inject, OnInit} from '@angular/cor
 import {MatSnackBar} from "@angular/material";
 import {SuccessComponent} from "../snackbar/success-bar";
 import {FailedComponent} from "../snackbar/failed-bar";
+import {VirtualServerTabComponent} from "../virtual-server-tab/virtual-server-tab.component";
 
 
 @Component({
@@ -11,15 +12,15 @@ import {FailedComponent} from "../snackbar/failed-bar";
 })
 
 export class ExpertConfigTabComponent implements OnInit, AfterViewInit {
-
-  fileToUpload: File = null;
+  fileToUpload = '';
   fileName = '';
-  editedYaml = '#请在此输入yaml#\n';
+  editedYaml = '#请在此输入yaml\n';
   config = {mode: 'yaml', theme: 'eclipse', lineNumbers: true};
 
   constructor(@Inject('dataService') private dataService,
               private snackBar: MatSnackBar,
-              private elementRef: ElementRef) {
+              private elementRef: ElementRef,
+              private virtualServer: VirtualServerTabComponent) {
   }
 
   ngOnInit() {
@@ -43,17 +44,15 @@ export class ExpertConfigTabComponent implements OnInit, AfterViewInit {
 
   submit() {
     let data: any;
-    let type = '';
     if(this.fileToUpload) {
       data = this.fileToUpload;
-      type = 'file';
     } else {
-      data = this.editedYaml.split('#')[2];
-      type = 'text';
+      data = this.editedYaml;
     }
-    this.dataService.addConfigMap('default', data, type)
+    this.dataService.addConfigMap('default', data)
       .then(() => {
         this.clear();
+        this.virtualServer.getAllVirtualServers();
         this._openSuccessBar()
       })
       .catch((error) => {
@@ -63,14 +62,21 @@ export class ExpertConfigTabComponent implements OnInit, AfterViewInit {
   }
 
   clear() {
-    this.editedYaml = '';
-    this.fileToUpload = null;
+    this.editedYaml = '#请在此输入yaml\n';
+    this.fileToUpload = '';
     this.fileName = '';
   }
 
   selectFile(files: FileList) {
-    this.fileToUpload = files.item(0);
-    this.fileName = this.fileToUpload.name;
+    let file = files.item(0);
+    if(file) {
+      this.fileName = file.name;
+      let fileReader = new FileReader();
+      fileReader.onload = () => {
+        this.fileToUpload = fileReader.result;
+      };
+      fileReader.readAsText(file);
+    }
   }
 
   private _openSuccessBar() {

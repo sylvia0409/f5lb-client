@@ -1,17 +1,22 @@
 .add-device-card {
-  padding: 5% 7%;
+  padding: 5% 8%;
 }
 
 .mat-dialog-title {
-  margin-left: 30%;
+  margin-left: 32%;
   letter-spacing: 1px;
   font-size: 22px;
   font-weight: 400;
 }
 
 .title {
+  margin-left: 2px;
   font-size: 18px;
   font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+
+#first-title {
+  padding-bottom: 10px;
 }
 
 .mat-form-field {
@@ -21,7 +26,7 @@
 }
 
 .right-input {
-  margin-left: 50px;
+  margin-left: 60px;
 }
 
 #login-info {
@@ -29,8 +34,8 @@
 }
 
 .action.mat-dialog-actions {
-  padding-top: 7%;
-  padding-left: 24%;
+  padding-top: 5%;
+  padding-left: 25%;
 }
 
 button {

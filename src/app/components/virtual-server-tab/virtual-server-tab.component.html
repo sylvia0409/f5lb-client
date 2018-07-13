@@ -1,0 +1,74 @@
+<mat-toolbar>
+  <!--search bar-->
+  <mat-form-field appearance="outline">
+    <mat-label>
+      <i class="material-icons" id="search-button">search</i>
+    </mat-label>
+    <input matInput id="search" type="search" [(ngModel)]="inputData" (keydown)="search($event)" autocomplete="off" placeholder="请输入关键字">
+  </mat-form-field>
+  <!--refresh-->
+  <button mat-button color="primary" class="first-line-button" id="refresh-button" (click)="refresh()">
+    <i class="material-icons" id="refresh-img">refresh</i>
+  </button>
+</mat-toolbar>
+<!--Form-->
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource">
+    <!-- CMName Column -->
+    <ng-container matColumnDef="CMName">
+      <th mat-header-cell *matHeaderCellDef> ConfigMap </th>
+      <td mat-cell *matCellDef="let element"> {{element.cmName}} </td>
+    </ng-container>
+
+    <!-- VSAddress Column -->
+    <ng-container matColumnDef="VSAddress">
+      <th mat-header-cell *matHeaderCellDef> 设备访问地址 </th>
+      <td mat-cell *matCellDef="let element"> {{element.vsAddress}} </td>
+    </ng-container>
+
+    <!-- Partition Column -->
+    <ng-container matColumnDef="Partition">
+      <th mat-header-cell *matHeaderCellDef> 分区 </th>
+      <td mat-cell *matCellDef="let element"> {{element.partition}} </td>
+    </ng-container>
+
+    <!-- Balance Column -->
+    <ng-container matColumnDef="Balance">
+      <th mat-header-cell *matHeaderCellDef> 负载均衡算法 </th>
+      <td mat-cell *matCellDef="let element"> {{element.balance}} </td>
+    </ng-container>
+
+    <!-- ServiceName Column -->
+    <ng-container matColumnDef="ServiceName">
+      <th mat-header-cell *matHeaderCellDef> 服务名 </th>
+      <td mat-cell *matCellDef="let element"> {{element.serviceName}} </td>
+    </ng-container>
+
+    <!-- ServicePort Column -->
+    <ng-container matColumnDef="ServicePort">
+      <th mat-header-cell *matHeaderCellDef> 服务端口 </th>
+      <td mat-cell *matCellDef="let element"> {{element.servicePort}} </td>
+    </ng-container>
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="Action">
+      <th mat-header-cell *matHeaderCellDef> 操作 </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-button color="primary" class="form-button" id="build" (click)="changeVirtualServer(element.cmName)">
+          <mat-icon>build</mat-icon>
+        </button>
+        <button mat-button color="primary" class="form-button" (click)="getOneVirtualServer(element.cmName)">
+          <mat-icon>visibility</mat-icon>
+        </button>
+        <button mat-button color="primary" class="form-button" (click)="deleteVirtualServer(element.cmName)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <!--foot-->
+  <mat-paginator [pageSizeOptions]="[10, 15, 20]" class="paginator"></mat-paginator>
+</div>

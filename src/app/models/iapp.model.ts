@@ -1,8 +1,7 @@
-export class Device {
+export class IApp {
   cmName: string;
-  vsAddress: string;
   partition: string;
-  balance: string;
+  iapp: string;
   serviceName: string;
   servicePort: string;
 }

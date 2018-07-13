@@ -6,17 +6,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { BackgroundCardComponent } from './components/background-card/background-card.component';
 import { CardContentComponent } from './components/card-content/card-content.component';
-import { LbDeviceTabComponent } from './components/lb-device-tab/lb-device-tab.component';
+import { VirtualServerTabComponent } from "./components/virtual-server-tab/virtual-server-tab.component";
+import { IappTabComponent } from './components/iapp-tab/iapp-tab.component';
 import { EasyConfigTabComponent } from './components/easy-config-tab/easy-config-tab.component';
 import { ExpertConfigTabComponent } from './components/expert-config-tab/expert-config-tab.component';
-import { AddDeviceCardComponent } from "./components/pop-card/add-device-card/add-device-card";
-import { DeviceInfoCardComponent } from "./components/pop-card/device-info-card/device-info-card";
-import { ChangeDeviceCardComponent } from "./components/pop-card/change-device-card/change-device-card";
+import { ConfigmapInfoCardComponent } from "./components/pop-card/configmap-info-card/configmap-info-card";
+import { ChangeVSCardComponent } from "./components/pop-card/change-vs-card/change-vs-card";
+import { ChangeIappCardComponent } from "./components/pop-card/change-iapp-card/change-iapp-card";
 import { SuccessComponent } from "./components/snackbar/success-bar";
 import { FailedComponent } from "./components/snackbar/failed-bar";
 
 import { DataService } from "./services/data.service";
 
+import {CodemirrorModule} from "ng2-codemirror";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CdkTableModule} from '@angular/cdk/table';
 import {
@@ -36,21 +38,22 @@ import {
   MatSnackBarModule,
   MatBottomSheetModule
 } from '@angular/material';
-import {CodemirrorModule} from "ng2-codemirror";
+
 
 @NgModule({
   declarations: [
     AppComponent,
     BackgroundCardComponent,
-    LbDeviceTabComponent,
+    VirtualServerTabComponent,
     EasyConfigTabComponent,
     ExpertConfigTabComponent,
-    AddDeviceCardComponent,
-    DeviceInfoCardComponent,
+    ConfigmapInfoCardComponent,
     CardContentComponent,
-    ChangeDeviceCardComponent,
+    ChangeVSCardComponent,
+    ChangeIappCardComponent,
     SuccessComponent,
-    FailedComponent
+    FailedComponent,
+    IappTabComponent
   ],
   imports: [
     BrowserModule,
@@ -79,13 +82,14 @@ import {CodemirrorModule} from "ng2-codemirror";
   providers: [{
     provide: 'dataService',
     useClass: DataService
-  }],
+  },
+    VirtualServerTabComponent],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [
-    AddDeviceCardComponent,
-    DeviceInfoCardComponent,
-    ChangeDeviceCardComponent,
+    ConfigmapInfoCardComponent,
+    ChangeVSCardComponent,
+    ChangeIappCardComponent,
     SuccessComponent,
     FailedComponent
   ]

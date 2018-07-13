@@ -3,19 +3,20 @@
 }
 
 .mat-dialog-title {
-  margin-left: 30%;
+  margin-left: 32%;
   letter-spacing: 1px;
   font-size: 22px;
   font-weight: 400;
 }
 
 .title {
+  margin-left: 2px;
   font-size: 18px;
   font-family: Roboto,"Helvetica Neue",sans-serif;
 }
 
 #first-title {
-  padding-bottom: 15px;
+  padding-bottom: 10px;
 }
 
 .mat-form-field {
@@ -34,7 +35,7 @@
 
 .action.mat-dialog-actions {
   padding-top: 5%;
-  padding-left: 25%;
+  padding-left: 24%;
 }
 
 button {
@@ -49,7 +50,7 @@ button {
 }
 
 button.mat-button.mat-primary {
-  margin-left: 47px;
+  margin-left: 55px;
 }
 
 mat-error {

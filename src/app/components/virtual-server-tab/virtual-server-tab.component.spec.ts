@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LbDeviceTabComponent } from './lb-device-tab.component';
+import {VirtualServerTabComponent} from './virtual-server-tab.component';
 
-describe('LbDeviceTabComponent', () => {
-  let component: LbDeviceTabComponent;
-  let fixture: ComponentFixture<LbDeviceTabComponent>;
+describe('VirtualServerTabComponent', () => {
+  let component: VirtualServerTabComponent;
+  let fixture: ComponentFixture<VirtualServerTabComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LbDeviceTabComponent ]
+      declarations: [ VirtualServerTabComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LbDeviceTabComponent);
+    fixture = TestBed.createComponent(VirtualServerTabComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

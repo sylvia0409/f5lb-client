@@ -1,12 +1,5 @@
-.menu {
-  width: 145px;
-  margin-left: 15px;
-  margin-top: 20px;
-  text-align: center;
-}
-
 mat-card {
-  margin: 15px 12px;
+  margin: 40px 12px;
   position: center;
 }
 
@@ -34,9 +27,9 @@ p {
   margin-top: 25px;
 }
 
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
-  border-top: 8px solid transparent;
-}
+/*::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {*/
+  /*border-top: 8px solid transparent;*/
+/*}*/
 
 ::ng-deep .mat-select-arrow {
   margin-top: 8px !important;
