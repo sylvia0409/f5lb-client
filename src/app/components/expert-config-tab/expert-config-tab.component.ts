@@ -1,8 +1,7 @@
-import {AfterViewInit, Component, ElementRef, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {MatSnackBar} from "@angular/material";
 import {SuccessComponent} from "../snackbar/success-bar";
 import {FailedComponent} from "../snackbar/failed-bar";
-import {VirtualServerTabComponent} from "../virtual-server-tab/virtual-server-tab.component";
 
 
 @Component({
@@ -11,17 +10,13 @@ import {VirtualServerTabComponent} from "../virtual-server-tab/virtual-server-ta
   styleUrls: ['./expert-config-tab.component.css']
 })
 
-export class ExpertConfigTabComponent implements OnInit, AfterViewInit {
-  fileToUpload = '';
-  fileName = '';
+export class ExpertConfigTabComponent implements OnInit {
+  url = '';
   editedYaml = '#请在此输入yaml\n';
   config = {mode: 'yaml', theme: 'eclipse', lineNumbers: true};
 
   constructor(@Inject('dataService') private dataService,
-              private snackBar: MatSnackBar,
-              private elementRef: ElementRef,
-              private virtualServer: VirtualServerTabComponent) {
-  }
+              private snackBar: MatSnackBar) {  }
 
   ngOnInit() {
     if (document.getElementById('code')) {
@@ -29,30 +24,10 @@ export class ExpertConfigTabComponent implements OnInit, AfterViewInit {
     }
   }
 
-  ngAfterViewInit() {
-    this.elementRef.nativeElement.getElementsByClassName('CodeMirror-sizer')[0].setAttribute('style','margin-left: 30px; min-width: 3px; padding-right: 0px; padding-bottom: 0px; margin-bottom: 0px; border-right-width: 30px; min-height: 172px;');
-    this.elementRef.nativeElement.getElementsByClassName('CodeMirror-gutter')[0].setAttribute('style','width: 29px;');
-    this.elementRef.nativeElement.getElementsByClassName('CodeMirror-gutters')[0].setAttribute('style', 'left: 0px; height: 202px;');
-  }
-
-  onFocus() {
-    if(document.getElementsByClassName('CodeMirror-cursor')[0]){
-      document.getElementsByClassName('CodeMirror-cursor')[0]
-              .setAttribute('style','left: 4px; top: 20px; height: 16px;');
-    }
-  }
-
   submit() {
-    let data: any;
-    if(this.fileToUpload) {
-      data = this.fileToUpload;
-    } else {
-      data = this.editedYaml;
-    }
-    this.dataService.addConfigMap('default', data)
+    this.dataService.addConfigMap(this.editedYaml)
       .then(() => {
         this.clear();
-        this.virtualServer.getAllVirtualServers();
         this._openSuccessBar()
       })
       .catch((error) => {
@@ -63,17 +38,15 @@ export class ExpertConfigTabComponent implements OnInit, AfterViewInit {
 
   clear() {
     this.editedYaml = '#请在此输入yaml\n';
-    this.fileToUpload = '';
-    this.fileName = '';
+    this.url = '';
   }
 
   selectFile(files: FileList) {
     let file = files.item(0);
     if(file) {
-      this.fileName = file.name;
       let fileReader = new FileReader();
       fileReader.onload = () => {
-        this.fileToUpload = fileReader.result;
+        this.editedYaml = '#' + file.name +'\n' + fileReader.result;
       };
       fileReader.readAsText(file);
     }

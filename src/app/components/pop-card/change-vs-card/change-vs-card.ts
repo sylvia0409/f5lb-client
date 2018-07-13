@@ -43,7 +43,7 @@ export class ChangeVSCardComponent implements OnInit{
         this.originData = res;
         this.virtualServer['cmName'] = res.metadata.name;
         this.virtualServer['vsAddress'] = this.clearData.virtualServer.frontend.virtualAddress.bindAddr + ':' +
-                                   this.clearData.virtualServer.frontend.virtualAddress.port;
+                                          this.clearData.virtualServer.frontend.virtualAddress.port;
         this.virtualServer['partition'] = this.clearData.virtualServer.frontend.partition;
         this.virtualServer['balance'] = this.clearData.virtualServer.frontend.balance;
         this.virtualServer['serviceName'] = this.clearData.virtualServer.backend.serviceName;

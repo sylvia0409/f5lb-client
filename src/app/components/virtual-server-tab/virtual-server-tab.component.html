@@ -10,14 +10,28 @@
   <button mat-button color="primary" class="first-line-button" id="refresh-button" (click)="refresh()">
     <i class="material-icons" id="refresh-img">refresh</i>
   </button>
+  <span class="toolbar-spacer"></span>
+  <!--delete-->
+  <button mat-button color="warn" class="first-line-button" id="delete-button" (click)="deleteVirtualServer()">
+    <i class="material-icons">delete</i>
+  </button>
 </mat-toolbar>
 <!--Form-->
 <div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource">
+  <table mat-table [dataSource]="dataSource" [formGroup]="surveyForm">
     <!-- CMName Column -->
     <ng-container matColumnDef="CMName">
-      <th mat-header-cell *matHeaderCellDef> ConfigMap </th>
-      <td mat-cell *matCellDef="let element"> {{element.cmName}} </td>
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox formControlName="title" (change)="selectedAll($event)" color="warn"></mat-checkbox>
+        ConfigMap
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-checkbox [id]="element.id" [formControlName]="element.id"
+                      (change)="selectedSome($event, element)"
+                      color="warn">
+        </mat-checkbox>
+        {{element.cmName}}
+      </td>
     </ng-container>
 
     <!-- VSAddress Column -->
@@ -59,9 +73,6 @@
         </button>
         <button mat-button color="primary" class="form-button" (click)="getOneVirtualServer(element.cmName)">
           <mat-icon>visibility</mat-icon>
-        </button>
-        <button mat-button color="primary" class="form-button" (click)="deleteVirtualServer(element.cmName)">
-          <mat-icon>delete</mat-icon>
         </button>
       </td>
     </ng-container>

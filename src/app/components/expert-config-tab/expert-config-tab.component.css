@@ -3,7 +3,7 @@
   border: 1px solid #3f51b5;
   border-radius: 4px;
   padding: 12px 15px;
-  top: 35px;
+  top: 15px;
   left: 16px;
   overflow: hidden;
   color: #3f51b5;
@@ -46,7 +46,7 @@
 
 ::ng-deep .CodeMirror {
   margin-left: 10px;
-  margin-top: 80px;
+  margin-top: 60px;
   height: 400px;
   border: solid 1px #E0E0E0;
   border-radius: 4px;

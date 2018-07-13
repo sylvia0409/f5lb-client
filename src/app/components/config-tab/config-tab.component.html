@@ -1,0 +1,13 @@
+<mat-form-field class="select">
+  <mat-select [(ngModel)]="currentMode" id="f5-select">
+    <mat-option *ngFor="let mode of modes" [value]="mode">
+      {{mode}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<div *ngIf="currentMode == '简易模式'">
+  <app-easy-config-tab></app-easy-config-tab>
+</div>
+<div *ngIf="currentMode == '专家模式'">
+  <app-expert-config-tab></app-expert-config-tab>
+</div>

@@ -38,6 +38,7 @@ import {
   MatSnackBarModule,
   MatBottomSheetModule
 } from '@angular/material';
+import { ConfigTabComponent } from './components/config-tab/config-tab.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import {
     ChangeIappCardComponent,
     SuccessComponent,
     FailedComponent,
-    IappTabComponent
+    IappTabComponent,
+    ConfigTabComponent
   ],
   imports: [
     BrowserModule,

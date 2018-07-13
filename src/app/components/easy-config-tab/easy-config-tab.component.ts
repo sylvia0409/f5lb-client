@@ -3,7 +3,6 @@ import {MatDialog, MatSnackBar} from "@angular/material";
 import {SuccessComponent} from "../snackbar/success-bar";
 import {FailedComponent} from "../snackbar/failed-bar";
 import {FormControl, Validators} from "@angular/forms";
-import {VirtualServerTabComponent} from "../virtual-server-tab/virtual-server-tab.component";
 import {DEFAULT_IAPP_CONFIG, DEFAULT_VIRTUAL_SERVER_CONFIG} from "../../models/default-config.model";
 
 
@@ -52,8 +51,7 @@ export class EasyConfigTabComponent implements OnInit {
 
   constructor(@Inject('dataService') private dataService,
               private dialog: MatDialog,
-              private snackBar: MatSnackBar,
-              private virtualServer: VirtualServerTabComponent) { }
+              private snackBar: MatSnackBar) { }
 
   ngOnInit() {
   }
@@ -75,7 +73,6 @@ export class EasyConfigTabComponent implements OnInit {
 
     this.dataService.addConfigMap(submitData)
       .then(() => {
-        this.virtualServer.getAllVirtualServers();
         this.clear();
         this._openSuccessBar();
       })

@@ -10,14 +10,28 @@
   <button mat-button color="primary" class="first-line-button" id="refresh-button" (click)="refresh()">
     <i class="material-icons" id="refresh-img">refresh</i>
   </button>
+  <span class="toolbar-spacer"></span>
+  <!--delete-->
+  <button mat-button color="warn" class="first-line-button" id="delete-button" (click)="deleteIapp()">
+    <i class="material-icons">delete</i>
+  </button>
 </mat-toolbar>
 <!--Form-->
 <div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource">
+  <table mat-table [dataSource]="dataSource" [formGroup]="surveyForm">
     <!-- CMName Column -->
     <ng-container matColumnDef="CMName">
-      <th mat-header-cell *matHeaderCellDef> ConfigMap </th>
-      <td mat-cell *matCellDef="let element"> {{element.cmName}} </td>
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox formControlName="title" (change)="selectedAll($event)" color="warn"></mat-checkbox>
+        ConfigMap
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-checkbox [id]="element.id" [formControlName]="element.id"
+                      (change)="selectedSome($event, element)"
+                      color="warn">
+        </mat-checkbox>
+        {{element.cmName}}
+      </td>
     </ng-container>
 
     <!-- Partition Column -->
@@ -28,7 +42,7 @@
 
     <!-- IApp Column -->
     <ng-container matColumnDef="IApp">
-      <th mat-header-cell *matHeaderCellDef> 负载均衡算法 </th>
+      <th mat-header-cell *matHeaderCellDef> iApp </th>
       <td mat-cell *matCellDef="let element"> {{element.iapp}} </td>
     </ng-container>
 
@@ -53,9 +67,6 @@
         </button>
         <button mat-button color="primary" class="form-button" (click)="getOneIapp(element.cmName)">
           <mat-icon>visibility</mat-icon>
-        </button>
-        <button mat-button color="primary" class="form-button" (click)="deleteIapp(element.cmName)">
-          <mat-icon>delete</mat-icon>
         </button>
       </td>
     </ng-container>

@@ -13,7 +13,7 @@ const baseURL = 'http://192.168.100.86/';
 
 export class DataService {
   namespace = localStorage.getItem('DCE_TENANT');
-  private options = {
+  options = {
     headers: new HttpHeaders({
       'Content-Type': 'application/yaml',
       'X-DCE-Access-Token': localStorage.getItem('DCE_TOKEN')
@@ -21,8 +21,7 @@ export class DataService {
   };
   private _configMapSource = new BehaviorSubject<any[]>([]);
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) { }
 
   getAllConfigMaps(): Observable<any[]> {
     this.http.get(baseURL + `api/v1/namespaces/${this.namespace}/configmaps`, this.options)
@@ -46,14 +45,18 @@ export class DataService {
   addConfigMap(configMap): Promise<any>{
     return this.http.post(baseURL + `api/v1/namespaces/${this.namespace}/configmaps`, configMap, this.options)
       .toPromise()
-      .then()
+      .then(() => {
+        this.getAllConfigMaps();
+      })
       .catch(this.handleError);
   }
 
   changeConfigMap(configMap, cmName): Promise<any> {
     return this.http.put(baseURL + `api/v1/namespaces/${this.namespace}/configmaps/${cmName}`, configMap, this.options)
       .toPromise()
-      .then()
+      .then(() => {
+        this.getAllConfigMaps();
+      })
       .catch(this.handleError);
   }
 
@@ -61,7 +64,7 @@ export class DataService {
     return this.http.delete(baseURL + `api/v1/namespaces/${this.namespace}/configmaps/${deviceName}`,this.options)
       .toPromise()
       .then((res) =>{
-        console.log('delete: ', res);
+        this.getAllConfigMaps();
         return res;
       })
       .catch(this.handleError);
