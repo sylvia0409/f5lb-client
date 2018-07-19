@@ -116,9 +116,8 @@ export class EasyConfigTabComponent implements OnInit {
 
   private _vsFormFilter(): {} {
     let copy = JSON.parse(JSON.stringify(this.newVirtualServerConfig));
-    copy.metadata.name = copy['data']['data']['virtualServer']['backend']['serviceName']
-                       + copy['data']['data']['virtualServer']['backend']['servicePort']
-                       + '-vs';
+    var timestamp = (new Date()).valueOf().toString(32);
+    copy.metadata.name = timestamp + '-vs';
     copy.metadata.namespace = this.namespace;
     if(!copy['data']['data']['virtualServer']['backend']['healthMonitors']['protocol']) {
         delete copy['data']['data']['virtualServer']['backend']['healthMonitors'];
@@ -129,9 +128,8 @@ export class EasyConfigTabComponent implements OnInit {
 
   private _iappFormFilter(): {} {
     let copy = JSON.parse(JSON.stringify(this.newIappConfig));
-    copy.metadata.name = copy['data']['data']['virtualServer']['backend']['serviceName']
-                       + copy['data']['data']['virtualServer']['backend']['servicePort']
-                       + '-iapp';
+    let timestamp = (new Date()).valueOf().toString(32);
+    copy.metadata.name = timestamp + '-iapp';
     copy.metadata.namespace = this.namespace;
     if(!copy['data']['data']['virtualServer']['frontend']['iappTables']) {
       delete copy['data']['data']['virtualServer']['frontend']['iappTables'];

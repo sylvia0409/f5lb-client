@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {BehaviorSubject, Observable} from "rxjs/index";
 
+
 //todo: delete this
 localStorage.setItem('DCE_TOKEN', 'eyJhbGciOiJIUzI1NiIsImV4cCI6MTUzMzY5NjY4NSwiaWF0IjoxNTMxMTA0Njg1fQ.eyJ1c2VybmFtZSI6ImFkbWluIn0.9KeEUwYDTIixQs3piRwt-HJiZY_zutlFLvyEMnR2lDk');
 localStorage.setItem('DCE_TENANT', 'default');
@@ -12,6 +13,7 @@ const baseURL = 'http://192.168.100.86/';
 })
 
 export class DataService {
+
   namespace = localStorage.getItem('DCE_TENANT');
   options = {
     headers: new HttpHeaders({
@@ -65,6 +67,15 @@ export class DataService {
       .toPromise()
       .then((res) =>{
         this.getAllConfigMaps();
+        return res;
+      })
+      .catch(this.handleError);
+  }
+  
+  authentication(loginData): Promise<any> {
+    return this.http.post('',loginData)
+      .toPromise()
+      .then((res:boolean) =>{
         return res;
       })
       .catch(this.handleError);
